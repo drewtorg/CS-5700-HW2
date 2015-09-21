@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    class Sensor
+    public class Sensor
     {
         public int ID { get; private set; }
         public double Location { get; private set; }

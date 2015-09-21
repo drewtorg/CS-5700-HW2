@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    class RaceManager
+    public class RaceManager
     {
     }
 }

@@ -8,19 +8,18 @@ namespace Racer
 {
     public enum LicenseType { Annual, OneDay };
 
-    public class Racer : Subject
+    public class Racer
     {
-
         public string Name { get; private set; }
         public DateTime DOB { get; private set; }
-        public int Bib { get; private set; }
-
+        public int Bib { get; set; }
+        public double Location { get; set; }
         
-        public Racer(string name, DateTime dob, int bib)
+        public Racer(string name, DateTime dob)
         {
             Name = name;
             DOB = dob;
-            Bib = bib;
+            Bib = -1;
         }
     }
 }
