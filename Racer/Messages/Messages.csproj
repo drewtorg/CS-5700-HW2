@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C0AEB34-BBE0-4169-AF20-52CAF90A25B4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{88244493-19F3-4FC8-B859-39742A4291FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Racer</RootNamespace>
-    <AssemblyName>Racer</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Messages</RootNamespace>
+    <AssemblyName>Messages</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,55 +29,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BigScreenForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BigScreenForm.Designer.cs">
-      <DependentUpon>BigScreenForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="BigScreenObserver.cs" />
-    <Compile Include="CheatingDetector.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="RaceGroup.cs" />
-    <Compile Include="RaceManager.cs" />
-    <Compile Include="Racer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RacerObserver.cs" />
-    <Compile Include="RacerStatusReceiver.cs" />
-    <Compile Include="RacerTracker.cs" />
-    <Compile Include="Sensor.cs" />
-    <Compile Include="SupportObsever.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Messages\Messages.csproj">
-      <Project>{88244493-19f3-4fc8-b859-39742a4291fb}</Project>
-      <Name>Messages</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="BigScreenForm.resx">
-      <DependentUpon>BigScreenForm.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="RacerStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

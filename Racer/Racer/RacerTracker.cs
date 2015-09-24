@@ -9,7 +9,7 @@ namespace Racer
     public class RacerTracker : IObservable<Racer>
     {
         private List<IObserver<Racer>> observers;
-        private Racer Racer { get; set; }
+        public Racer Racer { get; private set; }
 
         public RacerTracker(Racer r)
         {
@@ -17,9 +17,10 @@ namespace Racer
             observers = new List<IObserver<Racer>>();
         }
 
-        public void UpdateLocation(double loc)
+        public void UpdateLocation(double loc, DateTime timestamp)
         {
             Racer.Location = loc;
+            Racer.LastSeen = timestamp;
             foreach (var observer in observers)
             {
                 observer.OnNext(Racer);

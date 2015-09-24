@@ -9,29 +9,28 @@ namespace Racer
     public class RaceGroup
     {
         public string Label { get; private set; }
-        public Dictionary<int, Racer> Racers { get; private set; }
-        public HashSet<int> NumberBlock { get; private set; }
+        public int ID { get; private set; }
+        public Dictionary<int, RacerTracker> Racers { get; private set; }
+        public int BlockMin { get; private set; }
+        public int BlockMax { get; private set; }
         public DateTime StartTime { get; private set; }
 
-        private Random random;
-
-        public RaceGroup(string label, int numberBlockMin, int numberBlockMax, DateTime startTime)
+        public RaceGroup(int id, string label, int numberBlockMin, int numberBlockMax, DateTime startTime)
         {
+            ID = id;
             Label = label;
             StartTime = startTime;
-            NumberBlock = new HashSet<int>();
-            random = new Random();
-
-            for (; numberBlockMin <= numberBlockMax; ++numberBlockMin)
-                NumberBlock.Add(numberBlockMin);
+            BlockMin = numberBlockMin;
+            BlockMax = numberBlockMax;
+            Racers = new Dictionary<int, RacerTracker>();
         }
 
-        public void AddRacer(Racer r)
+        public void AddRacer(RacerTracker r)
         {
-            int assignedNumber = (random.Next(NumberBlock.Min(), NumberBlock.Max()));
-            NumberBlock.Remove(assignedNumber);
-            r.Bib = assignedNumber;
-            Racers.Add(assignedNumber, r);
+            if (BlockMin <= r.Racer.Bib && r.Racer.Bib <= BlockMax)
+                Racers.Add(r.Racer.Bib, r);
+            else
+                throw new ArgumentOutOfRangeException("Racer bib number out of range");
         }
     }
 }

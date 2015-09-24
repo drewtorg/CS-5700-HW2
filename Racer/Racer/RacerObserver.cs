@@ -8,13 +8,21 @@ namespace Racer
 {
     public abstract class RacerObserver : IObserver<Racer>
     {
-        public abstract void Update(Racer racer);
         private IDisposable unsubscriber;
 
+        public abstract void Update(Racer racer);
+        
         public void Subscribe(IObservable<Racer> provider)
         {
             if (provider != null)
                 unsubscriber = provider.Subscribe(this);
+        }
+
+        public void Subscribe(RaceGroup group)
+        {
+            foreach(var racer in group.Racers.Values)
+                if (racer != null)
+                    unsubscriber = racer.Subscribe(this);
         }
 
         public void Unsubscribe()
