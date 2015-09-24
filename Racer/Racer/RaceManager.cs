@@ -35,6 +35,11 @@ namespace Racer
             receiver.ReceiveData();
         }
 
+        public void Stop()
+        {
+            receiver.StopReceiving();
+        }
+
         public void UpdateStatus(RacerStatus status)
         {
             Sensor sensor = Sensors[status.SensorId];

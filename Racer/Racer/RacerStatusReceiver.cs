@@ -13,6 +13,7 @@ namespace Racer
     {
         private UdpClient client;
         private RaceManager manager;
+        private bool done;
 
         public RacerStatusReceiver(int port, RaceManager manager)
         {
@@ -20,26 +21,34 @@ namespace Racer
             this.manager = manager;
         }
 
+        public void StopReceiving()
+        {
+            done = true;
+            client.Close();
+        }
+
         public void ReceiveData()
         {
-            while (true)                            // This is not a good loop termination condition, but this is Dummy Server!
-            {
-                IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-                byte[] messageByes = client.Receive(ref ep);
-                if (messageByes != null)
-                {
-                    RacerStatus statusMessage = RacerStatus.Decode(messageByes);
-                    if (statusMessage != null)
-                    {
-                        manager.UpdateStatus(statusMessage);
-                    }
-                }
-            }
+            client.BeginReceive(new AsyncCallback(ReceiveCallback), null);
         }
 
         public void ReceiveCallback(IAsyncResult result)
         {
+            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
+            byte[] messageByes = client.EndReceive(result, ref ep);
 
+            if (messageByes != null)
+            {
+                RacerStatus statusMessage = RacerStatus.Decode(messageByes);
+                if (statusMessage != null)
+                {
+                    manager.UpdateStatus(statusMessage);
+                }
+            }
+
+            if (!done)
+                ReceiveData();
+            
         }
     }
 }
