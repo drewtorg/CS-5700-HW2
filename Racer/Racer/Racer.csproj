@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1C0AEB34-BBE0-4169-AF20-52CAF90A25B4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Racer</RootNamespace>
     <AssemblyName>Racer</AssemblyName>
@@ -55,6 +55,10 @@
     </Compile>
     <Compile Include="BigScreenObserver.cs" />
     <Compile Include="CheatingDetector.cs" />
+    <Compile Include="EmailDecorator.cs" />
+    <Compile Include="EmailSender.cs" />
+    <Compile Include="FooterSender.cs" />
+    <Compile Include="HeaderSender.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="RaceGroup.cs" />
     <Compile Include="RaceManager.cs" />
@@ -63,8 +67,9 @@
     <Compile Include="RacerObserver.cs" />
     <Compile Include="RacerStatusReceiver.cs" />
     <Compile Include="RacerTracker.cs" />
+    <Compile Include="Sender.cs" />
     <Compile Include="Sensor.cs" />
-    <Compile Include="SupportObsever.cs" />
+    <Compile Include="SupportObserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

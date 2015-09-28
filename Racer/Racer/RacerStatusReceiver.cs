@@ -34,21 +34,27 @@ namespace Racer
 
         public void ReceiveCallback(IAsyncResult result)
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-            byte[] messageByes = client.EndReceive(result, ref ep);
-
-            if (messageByes != null)
+            try
             {
-                RacerStatus statusMessage = RacerStatus.Decode(messageByes);
-                if (statusMessage != null)
-                {
-                    manager.UpdateStatus(statusMessage);
-                }
-            }
+                IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
 
-            if (!done)
-                ReceiveData();
-            
+                byte[] messageByes = client.EndReceive(result, ref ep);
+
+                if (messageByes != null)
+                {
+                    RacerStatus statusMessage = RacerStatus.Decode(messageByes);
+                    if (statusMessage != null)
+                    {
+                        manager.UpdateStatus(statusMessage);
+                    }
+                }
+
+                if (!done)
+                    ReceiveData();
+            }
+            catch (Exception e)
+            { }
+
         }
     }
 }

@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Threading;
 
 namespace Racer
 {
     public static class Runner
     {
+        [STAThread]
         public static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             RaceManager manager = new RaceManager();
-            SupportObsever obs = new SupportObsever();
+            SupportObserver obs = new SupportObserver();
+            //CheatingDetector detector = new CheatingDetector(manager.Groups);
+            BigScreenForm bigScreen = new BigScreenForm(manager);
             List<int> bibs = manager.Racers.Keys.ToList();
             obs.Subscribe(manager.Racers[bibs[1]]);
 
-            //CheatingDetector detector = new CheatingDetector(manager.Groups);
 
             manager.AddObserver(obs);
 
@@ -29,11 +35,7 @@ namespace Racer
             obs.Subscribe(manager.Racers[bibs[3]]);
 
 
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
-
+            Application.Run(new BigScreenForm(manager));
         }
     }
 }

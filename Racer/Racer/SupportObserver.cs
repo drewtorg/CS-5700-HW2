@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public class SupportObsever : RacerObserver
+    public class SupportObserver : RacerObserver
     {
         public override void Update(Racer racer)
         {

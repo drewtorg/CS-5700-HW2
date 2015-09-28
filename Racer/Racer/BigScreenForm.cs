@@ -12,9 +12,14 @@ namespace Racer
 {
     public partial class BigScreenForm : Form
     {
-        public BigScreenForm()
+        private BigScreenObserver observer;
+        private RaceManager manager;
+
+        public BigScreenForm(RaceManager manager)
         {
             InitializeComponent();
+            observer = new BigScreenObserver();
+            this.manager = manager;
         }
     }
 }
