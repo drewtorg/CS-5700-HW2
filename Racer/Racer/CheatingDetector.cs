@@ -11,12 +11,17 @@ namespace Racer
         private Dictionary<int, Racer> currentPositions;
         private Dictionary<int, Racer> lastPositions;
 
+        public string SendTo { get; set; }
+        private Sender sender;
+
         private const int TIME_BUFFER = 3;
 
-        public CheatingDetector(Dictionary<int, RaceGroup> groups)
+        public CheatingDetector(string to, string header = "", string footer = "", Dictionary<int, RaceGroup> groups)
         {
+            SendTo = to;
             currentPositions = new Dictionary<int, Racer>();
             lastPositions = new Dictionary<int, Racer>();
+            sender = new HeaderSender(header, new FooterSender(footer));
 
             foreach (var group in groups.Values)
                 Subscribe(group);
@@ -41,14 +46,14 @@ namespace Racer
                 Racer prevRacer, prevOther;
 
                 if (lastPositions.TryGetValue(other.Bib, out prevOther) && lastPositions.TryGetValue(racer.Bib, out prevRacer))
-                {
-                    if (other.GroupID != racer.GroupID && other.Location == racer.Location && prevOther.Location == prevRacer.Location && Math.Abs((other.LastSeen - racer.LastSeen).Seconds) < TIME_BUFFER && Math.Abs((prevOther.LastSeen - prevRacer.LastSeen).Seconds) < TIME_BUFFER)
-                    {
-                        //TODO: email judges that these racers are cheating
-                        Console.WriteLine(other.ToString() + " and " + racer.ToString() + " are cheating!!");
-                    }
-                }
+                    if (AreCheating(racer, other, prevRacer, prevOther))
+                        sender.Send(SendTo, "Cheaters detected!", other.ToString() + " and " + racer.ToString() + " are cheating!!");
            }
+        }
+
+        private bool AreCheating(Racer racer, Racer other, Racer prevRacer, Racer prevOther)
+        {
+            return (other.GroupID != racer.GroupID && other.Location == racer.Location && prevOther.Location == prevRacer.Location && Math.Abs((other.LastSeen - racer.LastSeen).Seconds) < TIME_BUFFER && Math.Abs((prevOther.LastSeen - prevRacer.LastSeen).Seconds) < TIME_BUFFER);
         }
     }
 }

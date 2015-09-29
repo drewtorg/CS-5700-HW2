@@ -10,9 +10,16 @@ namespace Racer
     {
         private string header;
 
-        public HeaderSender(string header, EmailSender next) : base(next)
+        public HeaderSender(string header, EmailSender next = null) : base(next)
         {
             this.header = header;
+        }
+
+        public override string appendMessage(string message)
+        {
+            if(Next != null)
+                return header + "\n\n" + Next.appendMessage(message);
+            return header + "\n\n" + message;
         }
     }
 }

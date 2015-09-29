@@ -17,7 +17,7 @@ namespace Racer
             Application.SetCompatibleTextRenderingDefault(false);
 
             RaceManager manager = new RaceManager();
-            SupportObserver obs = new SupportObserver();
+            SupportObserver obs = new SupportObserver("emailme@dot.com");
             //CheatingDetector detector = new CheatingDetector(manager.Groups);
             BigScreenForm bigScreen = new BigScreenForm(manager);
             List<int> bibs = manager.Racers.Keys.ToList();

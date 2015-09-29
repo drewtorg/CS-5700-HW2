@@ -8,11 +8,24 @@ namespace Racer
 {
     public class EmailDecorator : EmailSender
     {
-        protected EmailSender next;
+        public EmailSender Next { get; set; }
 
-        public EmailDecorator(EmailSender next)
+        public EmailDecorator(EmailSender next = null) : base()
         {
-            this.next = next;
+            Next = next;
         }
+
+        override public void Send(string to, string subject, string message)
+        {
+            base.Send(to, subject, appendMessage(message));
+        }
+
+        override public string appendMessage(string message)
+        {
+            if (Next != null)
+                return message + Next.appendMessage(message);
+            return message;
+        }
+
     }
 }

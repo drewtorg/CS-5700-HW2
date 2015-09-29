@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicEmailSender.cs" />
     <Compile Include="BigScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +56,12 @@
     </Compile>
     <Compile Include="BigScreenObserver.cs" />
     <Compile Include="CheatingDetector.cs" />
+    <Compile Include="ControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlForm.Designer.cs">
+      <DependentUpon>ControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmailDecorator.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="FooterSender.cs" />

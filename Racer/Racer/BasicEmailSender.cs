@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public interface Sender
+    public class BasicEmailSender : EmailSender
     {
-        void Send(string to, string subject, string message);
+        public BasicEmailSender(string username) : base() { }
     }
 }

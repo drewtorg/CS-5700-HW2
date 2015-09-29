@@ -1,6 +1,6 @@
 ﻿namespace Racer
 {
-    partial class BigScreenForm
+    partial class ControlForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // BigScreenForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 427);
-            this.Name = "BigScreenForm";
-            this.Text = "BigScreenObserver";
-            this.ResumeLayout(false);
-
+            this.Text = "ControlForm";
         }
 
         #endregion
