@@ -41,7 +41,7 @@ namespace Racer
             if (selectedObserver != null)
                 observerLabel.Text = "Subjects of " + selectedObserver.Title;
             else
-                observerLabel.Text = "No obverser selected";
+                observerLabel.Text = "No observer selected";
 
             foreach (RacerTracker tracker in manager.Racers.Values)
             {
@@ -92,7 +92,6 @@ namespace Racer
                 {
                     RacerTracker subject = item.Tag as RacerTracker;
                     selectedObserver.Subscribe(subject);
-                    manager.AddObserver(selectedObserver);
                 }
                 refreshRacerLists();
             }
@@ -102,11 +101,10 @@ namespace Racer
         {
             if (selectedObserver != null)
             {
-                foreach (ListViewItem item in racerView.SelectedItems)
+                foreach (ListViewItem item in subscribedView.SelectedItems)
                 {
                     RacerTracker subject = item.Tag as RacerTracker;
-                    selectedObserver.Unsubscribe();
-                    manager.RemoveObserver(selectedObserver);
+                    subject.Unsubscribe(selectedObserver);
                 }
                 refreshRacerLists();
             }
@@ -117,21 +115,21 @@ namespace Racer
             ObserverCreationForm modalDialogForm = new ObserverCreationForm();
             modalDialogForm.Text = "New Observer";
             modalDialogForm.ObserverTitle = string.Format("Observer #{0}", manager.Observers.Count + 1);
-            if (modalDialogForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (modalDialogForm.ShowDialog() == DialogResult.OK)
             {
                 RacerObserver observer;
 
-                if (modalDialogForm.Type == ObserverCreationForm.ObserverType.Support)
+                if (modalDialogForm.Type == ObserverType.Support)
                     observer = new SupportObserver(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer);
 
-                else if (modalDialogForm.Type == ObserverCreationForm.ObserverType.CheatingDetector)
+                else if (modalDialogForm.Type == ObserverType.CheatingDetector)
                     observer = new CheatingDetector(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer);
 
                 else
                     observer = new BigScreenObserver(new BigScreenForm());
 
                 observer.Title = modalDialogForm.ObserverTitle;
-                manager.Observers.Add(observer);
+                manager.AddObserver(observer);
 
                 selectedObserver = null;
                 observerView.SelectedIndices.Clear();

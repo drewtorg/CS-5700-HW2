@@ -34,6 +34,12 @@ namespace Racer
             return new Unsubscriber(Observers, observer);
         }
 
+        public void Unsubscribe(IObserver<Racer> observer)
+        {
+            if (Observers.Contains(observer))
+                Observers.Remove(observer);
+        }
+
         private class Unsubscriber : IDisposable
         {
             private List<IObserver<Racer>> _observers;
@@ -50,6 +56,13 @@ namespace Racer
                 if (_observer != null && _observers.Contains(_observer))
                     _observers.Remove(_observer);
             }
+
+            public void Dispose(IObserver<Racer> observer)
+            {
+                if (observer != null && _observers.Contains(observer))
+                    _observers.Remove(observer);
+            }
+
         }
     }
 }

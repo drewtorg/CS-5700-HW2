@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace Racer
 {
+    public enum ObserverType { Support, CheatingDetector, BigScreen };
+
     public partial class ObserverCreationForm : Form
     {
         public ObserverCreationForm()
         {
             InitializeComponent();
         }
-
-        public enum ObserverType { Support, CheatingDetector, BigScreen };
 
         public string ObserverTitle
         {
