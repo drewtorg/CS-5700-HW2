@@ -16,26 +16,7 @@ namespace Racer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            RaceManager manager = new RaceManager();
-            SupportObserver obs = new SupportObserver("emailme@dot.com");
-            //CheatingDetector detector = new CheatingDetector(manager.Groups);
-            BigScreenForm bigScreen = new BigScreenForm(manager);
-            List<int> bibs = manager.Racers.Keys.ToList();
-            obs.Subscribe(manager.Racers[bibs[1]]);
-
-
-            manager.AddObserver(obs);
-
-            obs.Subscribe(manager.Racers[bibs[0]]);
-
-            //manager.AddObserver(detector);
-
-            manager.Start();
-
-            obs.Subscribe(manager.Racers[bibs[3]]);
-
-
-            Application.Run(new BigScreenForm(manager));
+            Application.Run(new ControlForm());
         }
     }
 }

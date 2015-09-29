@@ -67,6 +67,12 @@
     <Compile Include="FooterSender.cs" />
     <Compile Include="HeaderSender.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="ObserverCreationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObserverCreationForm.Designer.cs">
+      <DependentUpon>ObserverCreationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RaceGroup.cs" />
     <Compile Include="RaceManager.cs" />
     <Compile Include="Racer.cs" />
@@ -90,6 +96,12 @@
   <ItemGroup>
     <EmbeddedResource Include="BigScreenForm.resx">
       <DependentUpon>BigScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlForm.resx">
+      <DependentUpon>ControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObserverCreationForm.resx">
+      <DependentUpon>ObserverCreationForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

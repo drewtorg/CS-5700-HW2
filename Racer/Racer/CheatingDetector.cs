@@ -16,15 +16,12 @@ namespace Racer
 
         private const int TIME_BUFFER = 3;
 
-        public CheatingDetector(string to, string header = "", string footer = "", Dictionary<int, RaceGroup> groups)
+        public CheatingDetector(string to, string header = "", string footer = "")
         {
             SendTo = to;
             currentPositions = new Dictionary<int, Racer>();
             lastPositions = new Dictionary<int, Racer>();
             sender = new HeaderSender(header, new FooterSender(footer));
-
-            foreach (var group in groups.Values)
-                Subscribe(group);
         }
 
         public override void Update(Racer racer)

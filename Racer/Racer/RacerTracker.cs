@@ -8,20 +8,20 @@ namespace Racer
 {
     public class RacerTracker : IObservable<Racer>
     {
-        private List<IObserver<Racer>> observers;
+        public List<IObserver<Racer>> Observers { get; private set; }
         public Racer Racer { get; private set; }
 
         public RacerTracker(Racer r)
         {
             Racer = r;
-            observers = new List<IObserver<Racer>>();
+            Observers = new List<IObserver<Racer>>();
         }
 
         public void UpdateLocation(double loc, DateTime timestamp)
         {
             Racer.Location = loc;
             Racer.LastSeen = timestamp;
-            foreach (var observer in observers)
+            foreach (var observer in Observers)
             {
                 observer.OnNext(Racer);
             }
@@ -29,9 +29,9 @@ namespace Racer
 
         public IDisposable Subscribe(IObserver<Racer> observer)
         {
-            if (!observers.Contains(observer))
-                observers.Add(observer);
-            return new Unsubscriber(observers, observer);
+            if (!Observers.Contains(observer))
+                Observers.Add(observer);
+            return new Unsubscriber(Observers, observer);
         }
 
         private class Unsubscriber : IDisposable

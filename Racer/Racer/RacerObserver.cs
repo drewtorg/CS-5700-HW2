@@ -9,6 +9,12 @@ namespace Racer
     public abstract class RacerObserver : IObserver<Racer>
     {
         private IDisposable unsubscriber;
+        public string Title { get; set; }
+
+        public RacerObserver(string title = "")
+        {
+            Title = title;
+        }
 
         public abstract void Update(Racer racer);
         

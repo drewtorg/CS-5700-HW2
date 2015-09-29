@@ -8,9 +8,17 @@ namespace Racer
 {
     public class BigScreenObserver : RacerObserver
     {
+        private BigScreenForm form;
+
+        public BigScreenObserver(BigScreenForm form)
+        {
+            this.form = form;
+            form.Show();
+        }
+
         public override void Update(Racer racer)
         {
-            throw new NotImplementedException();
+            form.Update(racer);
         }
     }
 }

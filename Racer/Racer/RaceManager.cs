@@ -55,6 +55,12 @@ namespace Racer
                 Observers.Add(observer);
         }
 
+        public void RemoveObserver(RacerObserver observer)
+        {
+            if (Observers.Contains(observer))
+                Observers.Remove(observer);
+        }
+
         private Dictionary<int, RaceGroup> ReadGroups(string filename)
         {
             Dictionary<int, RaceGroup> groups = new Dictionary<int, RaceGroup>();
