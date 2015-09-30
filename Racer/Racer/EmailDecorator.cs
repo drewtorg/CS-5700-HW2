@@ -17,13 +17,13 @@ namespace Racer
 
         override public void Send(string to, string subject, string message)
         {
-            base.Send(to, subject, appendMessage(message));
+            base.Send(to, subject, AppendMessage(message));
         }
 
-        override public string appendMessage(string message)
+        override public string AppendMessage(string message)
         {
             if (Next != null)
-                return message + Next.appendMessage(message);
+                return message + Next.AppendMessage(message);
             return message;
         }
 

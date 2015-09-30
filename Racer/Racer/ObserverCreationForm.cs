@@ -75,12 +75,14 @@ namespace Racer
                     toTextBox.Enabled = false;
                     headerTextBox.Enabled = false;
                     footerTextBox.Enabled = false;
+                    quoteCheckBox.Enabled = false;
                 }
                 else
                 {
                     toTextBox.Enabled = true;
                     headerTextBox.Enabled = true;
                     footerTextBox.Enabled = true;
+                    quoteCheckBox.Enabled = true;
                 }
             }
         }

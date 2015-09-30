@@ -6,23 +6,19 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public class SupportObserver : RacerObserver
+    public class SupportObserver : EmailObserver
     {
-        private Sender sender;
-        
-        public string SendTo { get; set; }
+        private const string subjectString = "Racer Update";
 
-        public SupportObserver(string to, string header="", string footer="")
+        public SupportObserver(string to, string header="", string footer="", bool quotes=false) : base(to, header, footer, quotes)
         {
-            SendTo = to;
-            sender = new HeaderSender(header, new FooterSender(footer));
         }
 
         public override void Update(ISubject subject)
         {
             base.Update(subject);
             Racer racer = subject as Racer;
-            sender.Send(SendTo, "Racer Update", racer.ToString() + " at: " + racer.LastSeen.ToString());
+            Email(subjectString, racer.ToString() + " at: " + racer.LastSeen.ToString());
         }
     }
 }

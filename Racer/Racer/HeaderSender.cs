@@ -15,10 +15,10 @@ namespace Racer
             this.header = header;
         }
 
-        public override string appendMessage(string message)
+        public override string AppendMessage(string message)
         {
             if(Next != null)
-                return header + "\n\n" + Next.appendMessage(message);
+                return header + "\n\n" + Next.AppendMessage(message);
             return header + "\n\n" + message;
         }
     }

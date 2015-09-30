@@ -17,7 +17,7 @@ namespace Racer
         public int GroupID { get; set; }
         public double Location { get; set; }
         public DateTime LastSeen { get; set; }
-
+        public DateTime EndTime { get; set; }
         public List<IObserver> Observers { get; private set; }
 
         public Racer(string firstName, string lastName, int bib, int groupId)
@@ -43,13 +43,13 @@ namespace Racer
 
         public void Subscribe(IObserver observer)
         {
-            if (!Observers.Contains(observer))
+            if (observer != null && !Observers.Contains(observer))
                 Observers.Add(observer);
         }
 
         public void Unsubscribe(IObserver observer)
         {
-            if (Observers.Contains(observer))
+            if (observer != null && Observers.Contains(observer))
             {
                 Observers.Remove(observer);
                 ((RacerObserver)observer).Remove(this);

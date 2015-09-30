@@ -42,6 +42,7 @@
             this.toTextBox = new System.Windows.Forms.TextBox();
             this.headerTextBox = new System.Windows.Forms.TextBox();
             this.footerTextBox = new System.Windows.Forms.TextBox();
+            this.quoteCheckBox = new System.Windows.Forms.CheckBox();
             this.typeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,7 +113,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(21, 195);
+            this.cancelButton.Location = new System.Drawing.Point(21, 219);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -122,7 +123,7 @@
             // 
             // creationButton
             // 
-            this.creationButton.Location = new System.Drawing.Point(334, 195);
+            this.creationButton.Location = new System.Drawing.Point(334, 219);
             this.creationButton.Name = "creationButton";
             this.creationButton.Size = new System.Drawing.Size(75, 23);
             this.creationButton.TabIndex = 5;
@@ -178,11 +179,23 @@
             this.footerTextBox.Size = new System.Drawing.Size(306, 20);
             this.footerTextBox.TabIndex = 15;
             // 
+            // quoteCheckBox
+            // 
+            this.quoteCheckBox.AutoSize = true;
+            this.quoteCheckBox.Location = new System.Drawing.Point(21, 188);
+            this.quoteCheckBox.Name = "quoteCheckBox";
+            this.quoteCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.quoteCheckBox.Size = new System.Drawing.Size(139, 17);
+            this.quoteCheckBox.TabIndex = 16;
+            this.quoteCheckBox.Text = ":Include Random Quote";
+            this.quoteCheckBox.UseVisualStyleBackColor = true;
+            // 
             // ObserverCreationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(426, 230);
+            this.ClientSize = new System.Drawing.Size(426, 248);
+            this.Controls.Add(this.quoteCheckBox);
             this.Controls.Add(this.footerTextBox);
             this.Controls.Add(this.headerTextBox);
             this.Controls.Add(this.toTextBox);
@@ -219,5 +232,6 @@
         private System.Windows.Forms.TextBox toTextBox;
         private System.Windows.Forms.TextBox headerTextBox;
         private System.Windows.Forms.TextBox footerTextBox;
+        private System.Windows.Forms.CheckBox quoteCheckBox;
     }
 }

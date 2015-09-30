@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Racer.Runner</StartupObject>
+    <StartupObject>Racer.RacerSimulator</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,6 +63,7 @@
       <DependentUpon>ControlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EmailDecorator.cs" />
+    <Compile Include="EmailObserver.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="FooterSender.cs" />
     <Compile Include="HeaderSender.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="ObserverCreationForm.Designer.cs">
       <DependentUpon>ObserverCreationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuoteSender.cs" />
     <Compile Include="RaceGroup.cs" />
     <Compile Include="RaceManager.cs" />
     <Compile Include="Racer.cs" />

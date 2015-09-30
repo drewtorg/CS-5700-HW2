@@ -30,7 +30,7 @@ namespace Racer
             Console.WriteLine("To: {0}\nFrom: {1}\nSubject:{2}\n{3}", to, username, subject, message);
         }
 
-        virtual public string appendMessage(string message)
+        virtual public string AppendMessage(string message)
         {
             return message;
         }

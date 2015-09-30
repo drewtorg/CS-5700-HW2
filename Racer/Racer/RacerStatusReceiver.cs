@@ -52,7 +52,7 @@ namespace Racer
                 if (!done)
                     ReceiveData();
             }
-            catch (Exception e)
+            catch (Exception)
             { }
 
         }

@@ -15,6 +15,8 @@ namespace Racer
         public int BlockMax { get; private set; }
         public DateTime StartTime { get; private set; }
 
+        private const int MAX_RACERS = 100;
+
         public RaceGroup(int id, string label, int numberBlockMin, int numberBlockMax, DateTime startTime)
         {
             ID = id;
@@ -27,10 +29,8 @@ namespace Racer
 
         public void AddRacer(Racer r)
         {
-            if (BlockMin <= r.Bib && r.Bib <= BlockMax)
+            if (r != null && Racers.Count < MAX_RACERS && BlockMin <= r.Bib && r.Bib <= BlockMax && !Racers.ContainsKey(r.Bib) && r.GroupID == ID)
                 Racers.Add(r.Bib, r);
-            else
-                throw new ArgumentOutOfRangeException("Racer bib number out of range");
         }
     }
 }

@@ -6,22 +6,18 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public class CheatingDetector : RacerObserver
+    public class CheatingDetector : EmailObserver
     {
         private Dictionary<int, Racer> currentPositions;
         private Dictionary<int, Racer> lastPositions;
 
-        public string SendTo { get; set; }
-        private Sender sender;
-
+        private const string subjectString = "Cheaters Detected!";
         private const int TIME_BUFFER = 3;
 
-        public CheatingDetector(string to, string header = "", string footer = "")
+        public CheatingDetector(string to, string header = "", string footer = "", bool quotes=false) : base(to, header, footer, quotes)
         {
-            SendTo = to;
             currentPositions = new Dictionary<int, Racer>();
             lastPositions = new Dictionary<int, Racer>();
-            sender = new HeaderSender(header, new FooterSender(footer));
         }
 
         public override void Update(ISubject subject)
@@ -47,8 +43,8 @@ namespace Racer
 
                 if (lastPositions.TryGetValue(other.Bib, out prevOther) && lastPositions.TryGetValue(racer.Bib, out prevRacer))
                     if (AreCheating(racer, other, prevRacer, prevOther))
-                        sender.Send(SendTo, "Cheaters detected!", other.ToString() + " and " + racer.ToString() + " are cheating!!");
-           }
+                        Email(subjectString, other.ToString() + " and " + racer.ToString() + " are cheating!!");
+            }
         }
 
         private bool AreCheating(Racer racer, Racer other, Racer prevRacer, Racer prevOther)

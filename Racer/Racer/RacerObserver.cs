@@ -22,23 +22,29 @@ namespace Racer
 
         public virtual void Remove(ISubject subject)
         {
-            lock(Lock)
+            if (subject != null && subject is Racer)
             {
-                Racer r = subject as Racer;
-                if (Racers.ContainsKey(r.Bib))
-                    Racers.Remove(r.Bib);
+                lock (Lock)
+                {
+                    Racer r = subject as Racer;
+                    if (Racers.ContainsKey(r.Bib))
+                        Racers.Remove(r.Bib);
+                }
             }
         }
 
         public virtual void Update(ISubject subject)
         {
-            lock(Lock)
+            if (subject != null && subject is Racer)
             {
-                Racer r = subject as Racer;
-                if (!Racers.ContainsKey(r.Bib))
-                    Racers.Add(r.Bib, r);
-                else
-                    Racers[r.Bib] = r;
+                lock (Lock)
+                {
+                    Racer r = subject as Racer;
+                    if (!Racers.ContainsKey(r.Bib))
+                        Racers.Add(r.Bib, r);
+                    else
+                        Racers[r.Bib] = r;
+                }
             }
         }
     }
