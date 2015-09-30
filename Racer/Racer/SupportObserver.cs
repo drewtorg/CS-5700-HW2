@@ -18,8 +18,10 @@ namespace Racer
             sender = new HeaderSender(header, new FooterSender(footer));
         }
 
-        public override void Update(Racer racer)
+        public override void Update(ISubject subject)
         {
+            base.Update(subject);
+            Racer racer = subject as Racer;
             sender.Send(SendTo, "Racer Update", racer.ToString() + " at: " + racer.LastSeen.ToString());
         }
     }

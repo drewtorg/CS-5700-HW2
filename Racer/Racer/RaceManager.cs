@@ -12,7 +12,7 @@ namespace Racer
     public class RaceManager
     {
         public Dictionary<int, RaceGroup> Groups { get; private set; }
-        public Dictionary<int, RacerTracker> Racers { get; private set; }
+        public Dictionary<int, Racer> Racers { get; private set; }
         public Dictionary<int, Sensor> Sensors { get; private set; }
         public List<RacerObserver> Observers { get; set; }
 
@@ -43,7 +43,7 @@ namespace Racer
         public void UpdateStatus(RacerStatus status)
         {
             Sensor sensor = Sensors[status.SensorId];
-            RacerTracker racer = Racers[status.RacerBibNumber];
+            Racer racer = Racers[status.RacerBibNumber];
             DateTime timestamp = new DateTime(status.Timestamp);
 
             racer.UpdateLocation(sensor.Location, timestamp);
@@ -93,9 +93,9 @@ namespace Racer
             return groups;
         }
 
-        private Dictionary<int, RacerTracker> ReadRacers(string filename)
+        private Dictionary<int, Racer> ReadRacers(string filename)
         {
-            Dictionary<int, RacerTracker> racers = new Dictionary<int, RacerTracker>();
+            Dictionary<int, Racer> racers = new Dictionary<int, Racer>();
             using (StreamReader reader = File.OpenText(filename))
             {
                 string all = reader.ReadToEnd();
@@ -114,7 +114,7 @@ namespace Racer
                         string first = pieces[0];
                         string last = pieces[1];
                         
-                        RacerTracker racer = new RacerTracker(new Racer(first, last, bib, groupId));
+                        Racer racer = new Racer(first, last, bib, groupId);
                         if (!racers.ContainsKey(bib))
                         {
                             racers.Add(bib, racer);

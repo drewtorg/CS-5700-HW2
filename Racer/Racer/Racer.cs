@@ -8,7 +8,7 @@ namespace Racer
 {
     public enum LicenseType { Annual, OneDay };
 
-    public class Racer
+    public class Racer : ISubject
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -17,15 +17,48 @@ namespace Racer
         public int GroupID { get; set; }
         public double Location { get; set; }
         public DateTime LastSeen { get; set; }
-        
+
+        public List<IObserver> Observers { get; private set; }
+
         public Racer(string firstName, string lastName, int bib, int groupId)
         {
+            Observers = new List<IObserver>();
             FirstName = firstName;
             LastName = lastName;
             GroupID = groupId;
             Location = 0;
             Bib = bib;
             //DOB = dob;
+        }
+
+        public void UpdateLocation(double loc, DateTime timestamp)
+        {
+            Location = loc;
+            LastSeen = timestamp;
+            foreach (var observer in Observers)
+            {
+                observer.Update(this);
+            }
+        }
+
+        public void Subscribe(IObserver observer)
+        {
+            if (!Observers.Contains(observer))
+                Observers.Add(observer);
+        }
+
+        public void Unsubscribe(IObserver observer)
+        {
+            if (Observers.Contains(observer))
+            {
+                Observers.Remove(observer);
+                ((RacerObserver)observer).Remove(this);
+            }
+        }
+
+        public void Notify()
+        {
+            UpdateLocation(Location, LastSeen);
         }
 
         public override string ToString()

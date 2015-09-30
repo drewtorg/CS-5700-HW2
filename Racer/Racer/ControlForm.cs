@@ -43,12 +43,11 @@ namespace Racer
             else
                 observerLabel.Text = "No observer selected";
 
-            foreach (RacerTracker tracker in manager.Racers.Values)
+            foreach (Racer r in manager.Racers.Values)
             {
-                Racer r = tracker.Racer;
                 ListViewItem item = new ListViewItem(new string[] { (r.FirstName + r.LastName), r.Bib.ToString(), r.GroupID.ToString() });
-                item.Tag = tracker;
-                if (selectedObserver != null && tracker.Observers.Contains(selectedObserver))
+                item.Tag = r;
+                if (selectedObserver != null && r.Observers.Contains(selectedObserver))
                     subscribedView.Items.Add(item);
                 else
                     racerView.Items.Add(item);
@@ -90,8 +89,8 @@ namespace Racer
             {
                 foreach (ListViewItem item in racerView.SelectedItems)
                 {
-                    RacerTracker subject = item.Tag as RacerTracker;
-                    selectedObserver.Subscribe(subject);
+                    Racer subject = item.Tag as Racer;
+                    subject.Subscribe(selectedObserver);
                 }
                 refreshRacerLists();
             }
@@ -103,7 +102,7 @@ namespace Racer
             {
                 foreach (ListViewItem item in subscribedView.SelectedItems)
                 {
-                    RacerTracker subject = item.Tag as RacerTracker;
+                    Racer subject = item.Tag as Racer;
                     subject.Unsubscribe(selectedObserver);
                 }
                 refreshRacerLists();

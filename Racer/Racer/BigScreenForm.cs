@@ -12,10 +12,10 @@ namespace Racer
 {
     public partial class BigScreenForm : Form
     {
-        private object myLock = new object();
-        private Dictionary<int, Racer> Racers = new Dictionary<int, Racer>();
         private Timer refreshTester = new Timer();
         private bool repaintNeeded = false;
+
+        public RacerObserver Observer { get; set; }
 
         public int RefreshFrequency { get; set; }
 
@@ -28,16 +28,7 @@ namespace Racer
         public void Update(Racer r)
         {
             if (r != null)
-            {
-                lock (myLock)
-                {
-                    if (!Racers.ContainsKey(r.Bib))
-                        Racers.Add(r.Bib, r);
-                    else
-                        Racers[r.Bib] = r;
-                }
                 repaintNeeded = true;
-            }
         }
 
         private void StartRefreshTimer()
@@ -52,9 +43,9 @@ namespace Racer
 
         private void refreshTimer_Tick(object sender, EventArgs e)
         {
-            if (repaintNeeded)
+            if (repaintNeeded || Observer.Racers.Count == 0)
             {
-                lock (myLock)
+                lock (Observer.Lock)
                 {
                     RefreshDisplay();
                     repaintNeeded = false;
@@ -65,7 +56,7 @@ namespace Racer
         private void RefreshDisplay()
         {
             racerView.Items.Clear();
-            foreach (Racer racer in Racers.Values)
+            foreach (Racer racer in Observer.Racers.Values)
             {
                 ListViewItem item = new ListViewItem(new string[]
                                                 {

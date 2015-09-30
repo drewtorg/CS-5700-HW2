@@ -63,6 +63,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 130;
             // 
             // columnHeader2
             // 
@@ -88,6 +89,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Name";
+            this.columnHeader4.Width = 131;
             // 
             // columnHeader5
             // 
@@ -112,6 +114,7 @@
             // columnHeader8
             // 
             this.columnHeader8.Text = "Title";
+            this.columnHeader8.Width = 250;
             // 
             // subscribeButton
             // 

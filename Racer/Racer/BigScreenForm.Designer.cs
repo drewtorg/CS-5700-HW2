@@ -78,6 +78,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Last Seen";
+            this.columnHeader6.Width = 96;
             // 
             // BigScreenForm
             // 

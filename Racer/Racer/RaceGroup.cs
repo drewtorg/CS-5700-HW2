@@ -10,7 +10,7 @@ namespace Racer
     {
         public string Label { get; private set; }
         public int ID { get; private set; }
-        public Dictionary<int, RacerTracker> Racers { get; private set; }
+        public Dictionary<int, Racer> Racers { get; private set; }
         public int BlockMin { get; private set; }
         public int BlockMax { get; private set; }
         public DateTime StartTime { get; private set; }
@@ -22,13 +22,13 @@ namespace Racer
             StartTime = startTime;
             BlockMin = numberBlockMin;
             BlockMax = numberBlockMax;
-            Racers = new Dictionary<int, RacerTracker>();
+            Racers = new Dictionary<int, Racer>();
         }
 
-        public void AddRacer(RacerTracker r)
+        public void AddRacer(Racer r)
         {
-            if (BlockMin <= r.Racer.Bib && r.Racer.Bib <= BlockMax)
-                Racers.Add(r.Racer.Bib, r);
+            if (BlockMin <= r.Bib && r.Bib <= BlockMax)
+                Racers.Add(r.Bib, r);
             else
                 throw new ArgumentOutOfRangeException("Racer bib number out of range");
         }

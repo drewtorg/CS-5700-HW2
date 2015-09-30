@@ -13,11 +13,14 @@ namespace Racer
         public BigScreenObserver(BigScreenForm form)
         {
             this.form = form;
+            this.form.Observer = this;
             form.Show();
         }
 
-        public override void Update(Racer racer)
+        public override void Update(ISubject subject)
         {
+            base.Update(subject);
+            Racer racer = subject as Racer;
             form.Update(racer);
         }
     }

@@ -6,49 +6,40 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public abstract class RacerObserver : IObserver<Racer>
+    public class RacerObserver : IObserver
     {
-        private IDisposable unsubscriber;
         public string Title { get; set; }
+        public Dictionary<int, Racer> Racers{ get; set; }
+        public object Lock { get; private set; }
+
 
         public RacerObserver(string title = "")
         {
             Title = title;
+            Lock = new object();
+            Racers = new Dictionary<int, Racer>();
         }
 
-        public abstract void Update(Racer racer);
-        
-        public void Subscribe(IObservable<Racer> provider)
+        public virtual void Remove(ISubject subject)
         {
-            if (provider != null)
-                unsubscriber = provider.Subscribe(this);
+            lock(Lock)
+            {
+                Racer r = subject as Racer;
+                if (Racers.ContainsKey(r.Bib))
+                    Racers.Remove(r.Bib);
+            }
         }
 
-        public void Subscribe(RaceGroup group)
+        public virtual void Update(ISubject subject)
         {
-            foreach(var racer in group.Racers.Values)
-                if (racer != null)
-                    unsubscriber = racer.Subscribe(this);
-        }
-
-        public void Unsubscribe()
-        {
-            unsubscriber.Dispose();
-        }
-
-        public void OnCompleted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNext(Racer value)
-        {
-            Update(value);
+            lock(Lock)
+            {
+                Racer r = subject as Racer;
+                if (!Racers.ContainsKey(r.Bib))
+                    Racers.Add(r.Bib, r);
+                else
+                    Racers[r.Bib] = r;
+            }
         }
     }
 }

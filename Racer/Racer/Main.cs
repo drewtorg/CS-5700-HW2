@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Racer
 {
-    public static class Runner
+    public static class RacerSimulator
     {
         [STAThread]
         public static void Main(string[] args)
