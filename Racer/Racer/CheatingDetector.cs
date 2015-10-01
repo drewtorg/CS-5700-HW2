@@ -11,13 +11,17 @@ namespace Racer
         private Dictionary<int, Racer> currentPositions;
         private Dictionary<int, Racer> lastPositions;
 
+        private Dictionary<int, Racer> cheaters;
+
         private const string subjectString = "Cheaters Detected!";
+        private const string messageHeader = "Here is an update of each cheater:\n";
         private const int TIME_BUFFER = 3;
 
         public CheatingDetector(string to, string header = "", string footer = "", bool quotes=false) : base(to, header, footer, quotes)
         {
             currentPositions = new Dictionary<int, Racer>();
             lastPositions = new Dictionary<int, Racer>();
+            cheaters = new Dictionary<int, Racer>();
         }
 
         public override void Update(ISubject subject)
@@ -35,6 +39,15 @@ namespace Racer
             }
         }
 
+        protected override void EmailCallback(object state)
+        {
+            if (cheaters.Count > 0)
+            {
+                string message = CreateRacersMessage(messageHeader);
+                Email(subjectString, message);
+            }
+        }
+
         private void DetectCheating(Racer racer)
         {
             foreach (Racer other in currentPositions.Values)
@@ -43,7 +56,13 @@ namespace Racer
 
                 if (lastPositions.TryGetValue(other.Bib, out prevOther) && lastPositions.TryGetValue(racer.Bib, out prevRacer))
                     if (AreCheating(racer, other, prevRacer, prevOther))
-                        Email(subjectString, other.ToString() + " and " + racer.ToString() + " are cheating!!");
+                    {
+                        lock(Lock)
+                        {
+                            cheaters.Add(racer.Bib, racer);
+                            cheaters.Add(other.Bib, other);
+                        }
+                    }
             }
         }
 

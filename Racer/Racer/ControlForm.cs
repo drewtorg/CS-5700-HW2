@@ -12,6 +12,10 @@ namespace Racer
 {
     public partial class ControlForm : Form
     {
+        private const string groupFile = @"../../../SensorSimulator/bin/Debug/Group.csv";
+        private const string racerFile = @"../../../SensorSimulator/bin/Debug/Racers.csv";
+        private const string sensorFile = @"../../../SensorSimulator/bin/Debug/Sensor.csv";
+
         private RaceManager manager;
         private RacerObserver selectedObserver = null;
 
@@ -19,7 +23,7 @@ namespace Racer
         {
             InitializeComponent();
             
-            manager = new RaceManager();
+            manager = new RaceManager(groupFile, racerFile, sensorFile);
             manager.Start();
         }
 
@@ -56,6 +60,7 @@ namespace Racer
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            manager.Stop();
             Close();
         }
 
@@ -119,10 +124,10 @@ namespace Racer
                 RacerObserver observer;
 
                 if (modalDialogForm.Type == ObserverType.Support)
-                    observer = new SupportObserver(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer);
+                    observer = new SupportObserver(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer, modalDialogForm.Quotes);
 
                 else if (modalDialogForm.Type == ObserverType.CheatingDetector)
-                    observer = new CheatingDetector(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer);
+                    observer = new CheatingDetector(modalDialogForm.To, modalDialogForm.Header, modalDialogForm.Footer, modalDialogForm.Quotes);
 
                 else
                     observer = new BigScreenObserver(new BigScreenForm());

@@ -9,16 +9,24 @@ namespace Racer
     public class SupportObserver : EmailObserver
     {
         private const string subjectString = "Racer Update";
+        private const string messageHeader = "Here is an update for each of your racers:\n";
 
         public SupportObserver(string to, string header="", string footer="", bool quotes=false) : base(to, header, footer, quotes)
         {
         }
 
+        protected override void EmailCallback(object state)
+        {
+            if (Racers.Count > 0)
+            {
+                string message = CreateRacersMessage(messageHeader);
+                Email(subjectString, message);
+            }
+        }
+
         public override void Update(ISubject subject)
         {
             base.Update(subject);
-            Racer racer = subject as Racer;
-            Email(subjectString, racer.ToString() + " at: " + racer.LastSeen.ToString());
         }
     }
 }

@@ -43,6 +43,12 @@ namespace Racer
             set { footerTextBox.Text = value; }
         }
 
+        public bool Quotes
+        {
+            get { return quoteCheckBox.Checked; }
+            set { quoteCheckBox.Checked = value; }
+        }
+
         public ObserverType Type
         {
             get { return (supportTypeRadioButton.Checked)   ?   ObserverType.Support :

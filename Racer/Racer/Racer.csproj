@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicEmailSender.cs" />
     <Compile Include="BigScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>

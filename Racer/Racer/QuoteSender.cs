@@ -20,6 +20,10 @@ namespace Racer
                 "Well acting is a unique profession. Because it's rare when a baker is confused with a cake. Only a crazy person would confuse a baker and a cake. But almost everyone confuses Sean Connery with James Bond. — Judd Nelson"
             };
 
+        public QuoteSender(EmailSender next = null) : base(next)
+        {
+        }
+
         public override string AppendMessage(string message)
         {
             string randomQuote = quotes[randomizer.Next(0, quotes.Length)];

@@ -13,10 +13,12 @@ namespace Racer
         [STAThread]
         public static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            QuoteSender sender = new QuoteSender(new HeaderSender("Heeelllo"));
+            sender.Send("Drew", "Goodbye", "nope");
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new ControlForm());
+            //Application.Run(new ControlForm());
         }
     }
 }

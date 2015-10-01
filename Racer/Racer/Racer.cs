@@ -65,5 +65,13 @@ namespace Racer
         {
             return string.Format("#{0}, Group {1}: {2} {3} at {4} miles at {5}", Bib, GroupID, FirstName, LastName, Location, LastSeen.ToLongTimeString());
         }
+
+        public override bool Equals(object obj)
+        {
+            Racer other = obj as Racer;
+            return this.Bib == other.Bib && 
+                this.FirstName.Equals(other.FirstName) && this.LastName.Equals(other.LastName) && 
+                this.GroupID == other.GroupID;
+        }
     }
 }

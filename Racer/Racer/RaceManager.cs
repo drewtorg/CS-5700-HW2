@@ -17,11 +17,8 @@ namespace Racer
         public List<RacerObserver> Observers { get; set; }
 
         private RacerStatusReceiver receiver;
-        private const string groupFile = @"../../../SensorSimulator/bin/Debug/Group.csv";
-        private const string racerFile = @"../../../SensorSimulator/bin/Debug/Racers.csv";
-        private const string sensorFile = @"../../../SensorSimulator/bin/Debug/Sensor.csv";
 
-        public RaceManager()
+        public RaceManager(string groupFile, string racerFile, string sensorFile)
         {
             Groups = ReadGroups(groupFile);
             Racers = ReadRacers(racerFile);
