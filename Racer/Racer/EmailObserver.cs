@@ -11,9 +11,10 @@ namespace Racer
     public class EmailObserver : RacerObserver
     {
         public string SendTo { get; set; }
-        private Sender sender;
+        private ISender sender;
 
         protected Timer timer;
+        private const int INTERVAL = 5;
 
         public EmailObserver(string to, string header = "", string footer = "", bool quotes = false)
         {
@@ -24,7 +25,7 @@ namespace Racer
             else
                 sender = new HeaderSender(header, new FooterSender(footer));
 
-            timer = new Timer(new TimerCallback(EmailCallback), null,TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
+            timer = new Timer(new TimerCallback(EmailCallback), null,TimeSpan.FromMinutes(INTERVAL), TimeSpan.FromMinutes(INTERVAL));
         }
 
         protected string CreateRacersMessage(string header)

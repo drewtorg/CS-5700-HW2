@@ -9,5 +9,6 @@ namespace Racer
     public interface IObserver
     {
         void Update(ISubject subject);
+        void Remove(ISubject subject);
     }
 }

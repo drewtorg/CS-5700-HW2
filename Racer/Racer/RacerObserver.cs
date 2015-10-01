@@ -12,9 +12,6 @@ namespace Racer
         public Dictionary<int, Racer> Racers{ get; set; }
         public object Lock { get; private set; }
 
-        public SortedDictionary<int, Racer> SortedRacers { get; set; }
-
-
         public RacerObserver(string title = "")
         {
             Title = title;

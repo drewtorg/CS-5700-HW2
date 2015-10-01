@@ -23,10 +23,5 @@ namespace Racer
                 Email(subjectString, message);
             }
         }
-
-        public override void Update(ISubject subject)
-        {
-            base.Update(subject);
-        }
     }
 }

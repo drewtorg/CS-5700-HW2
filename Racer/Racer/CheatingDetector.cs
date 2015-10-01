@@ -66,7 +66,7 @@ namespace Racer
             }
         }
 
-        private bool AreCheating(Racer racer, Racer other, Racer prevRacer, Racer prevOther)
+        public bool AreCheating(Racer racer, Racer other, Racer prevRacer, Racer prevOther)
         {
             return (other.GroupID != racer.GroupID && other.Location == racer.Location && prevOther.Location == prevRacer.Location && Math.Abs((other.LastSeen - racer.LastSeen).Seconds) < TIME_BUFFER && Math.Abs((prevOther.LastSeen - prevRacer.LastSeen).Seconds) < TIME_BUFFER);
         }

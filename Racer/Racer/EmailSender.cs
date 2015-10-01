@@ -8,7 +8,7 @@ using System.Net;
 
 namespace Racer
 {
-    public class EmailSender : Sender
+    public class EmailSender : ISender
     {
         private const string username = "your_email@gmail.com";
         private const string password = "your_email@gmail.com";

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racer
 {
-    public interface Sender
+    public interface ISender
     {
         void Send(string to, string subject, string message);
     }
